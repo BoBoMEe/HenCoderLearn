@@ -2,16 +2,16 @@
 
 1. 重写绘制方法 onDraw()
 2. Canvas的使用
-- Canvas绘制类方法，drawXX()
+- Canvas绘制类方法，drawXX()，这里涉及到关键参数 Paint 的操作
 - Canvas辅助类方法,范围裁切和几何变换
 3. 使用不同的绘制方法来控制遮盖关系
 
 # 自定义绘制的四个级别
 
-1. Canvas 的 drawXXX()
-2. Paint 的完全攻略
-3. Canvas 绘制辅助,范围裁切和几何变换
-4. 控制绘制顺序
+1. Canvas 的 `drawXXX()` 及 `Paint 使用`
+2. Paint 的完全攻略，挖掘 更多的 `Paint使用技巧` 及 `风格设置`
+3. Canvas 绘制辅助,范围裁切和几何变换，用于实现 `很炫酷的效果`
+4. 控制绘制顺序，提高UI性能（多层 View 才能拼凑出来效果，一个 View 搞定）
 
 # onDraw()： 一切的开始
 
@@ -27,13 +27,28 @@ protected void onDraw(Canvas canvas) {
 }
 ```
 
+主要涉及 Canvas 和 Paint 的 相关操作。
+
 ## Canvas
 
-Canvas：draw- 打头的方法，如drawCircle() drawBitmap()
+Canvas：draw- 打头的方法，
 
-## Paint
+- drawColor(@ColorInt int color)/drawRGB(int r, int g, int b):绘制之前设置底色,或者在绘制之后为界面设置半透明蒙版
+- drawCircle
+- drawRect
+- drawPoint
+- drawPoints
+- drawOval
+- drawLine
+- drawLines
+- drawRoundRect
+- drawArc
+- drawPath
 
-- Paint.setStyle(Style style) 设置绘制模式
+
+## Paint常用方法
+
+- Paint.setStyle(Style style) 设置绘制模式，空心或实心
 - Paint.setColor(int color) 设置颜色
 - Paint.setStrokeWidth(float width) 设置线条宽度
 - Paint.setTextSize(float textSize) 设置文字大小
@@ -44,10 +59,12 @@ Canvas：draw- 打头的方法，如drawCircle() drawBitmap()
 
 ## Path
 
-用于绘制自定义图形。
+用于绘制自定义图形，通过描述路径的方式来绘制图形。
 两类作用：一类是直接描述路径，二类是辅助的设置或计算。
 
 ### 直接描述路径
+
+这一类还可以细分为两组：添加子图形和画线（直线或曲线）
 
 - addXxx();添加子图形
 
@@ -77,7 +94,7 @@ Canvas：draw- 打头的方法，如drawCircle() drawBitmap()
 
 - Path.setFillType(Path.FillType ft)：设置填充方式
 
-包含四个值：
+包含四个值：填入不同的 FillType 值，就会有不同的填充效果
 
 - EVEN_ODD
 - WINDING （默认值）
