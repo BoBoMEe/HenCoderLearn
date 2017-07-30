@@ -1,9 +1,13 @@
+# 概述
+
+Paint 的完全功能的掌握，可以做出一些更加细致、炫酷的效果，本篇接上篇
+
 # Paint 相关API
 
 Paint 的 API 大致可以分为 4 类：
 
-- 颜色
-- 效果
+- 颜色 类
+- 效果 类
 - drawText() 相关
 - 初始化
 
@@ -19,10 +23,10 @@ Canvas 绘制的内容，有三层对颜色的处理：
 
 - drawColor/RGB/ARGB()：参数提供
 - drawBitmap()：Bitmap参数的像素颜色提供
-- 图形和文字的绘制，由Paint 属性设置的颜色（drawCircle,drawBitmap）
+- 图形和文字的绘制，由Paint 属性设置的颜色（drawText,drawPath）
 
 Paint 设置颜色的方法有两种：
-> 1. 通过 Paint.setColor/ARGB() 来设置颜色，
+> 1. 通过 Paint.setColor/ARGB() 来 `直接设置颜色`，
 > 2. 使用 Shader 来指定着色方案
 
 ### 直接设置颜色
@@ -79,6 +83,8 @@ PorterDuff.Mode 是两个 Shader 的 结合方式，一共有 17 个，分为两
 
 > 其中PorterDuffXfermode是Xfermode的唯一子类，其实也有别的子类，但现在都deprecated了。
 
+## Xfermode 注意事项
+
 ### Xfermode离屏缓冲
 
 把内容绘制在额外的层上，再把绘制好的内容贴回 View 中，避免出现奇怪的结果了。
@@ -110,9 +116,9 @@ canvas.restoreToCount(saved);
 
 透明区域不要太小，要让它足够覆盖到要和它结合绘制的内容
 
-# 效果
+# 效果类
 
-效果类的 API ，指的就是
+效果类的 API ，指的就是抗锯齿、填充/轮廓、线条宽度等等这些。
 
 1. 抗锯齿、（setAntiAlias）
 2. 填充/轮廓、（setStyle）
@@ -145,13 +151,22 @@ SumPathEffect,ComposePathEffect
 7. setMaskFilter：与setShadowLayer相反，在绘制层上方的附加效果
 
 比如常见的
-- BlurMaskFilter： 高斯模糊效果 MaskFilter
+- BlurMaskFilter： 高斯模糊效果 MaskFilter,
+
+> BlurMaskFilter(float radius, BlurMaskFilter.Blur style):其中，第三个参数的效果如下所示
+
 - EmbossMaskFilter：浮雕效果的 MaskFilter
+
+![](../images/blur_style.png)
 
 8. 获取绘制的 Path
 
 - getFillPath(Path src, Path dst):通过src计算出实际 Path，然后把结果保存在 dst 里
 - getTextPath：获取文字的path，Canvas.drawText实际是将文字转化为path
+
+Note：主要是用于图形和文字的装饰效果的位置计算
+
+![](../images/fill_path.png)
 
 
 # drawText() 相关
@@ -160,9 +175,9 @@ SumPathEffect,ComposePathEffect
 
 # 初始化类
 
-- reset()
-- set(Paint src)
-- setFlags(int flags)
+- reset(): 重置 Paint
+- set(Paint src):把 src 的所有属性全部复制过来
+- setFlags(int flags):批量设置 flags
 
 文章练习：https://github.com/BoBoMEe/PracticeDraw2
 

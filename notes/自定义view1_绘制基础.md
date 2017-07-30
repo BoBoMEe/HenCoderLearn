@@ -68,9 +68,18 @@ Canvas：draw- 打头的方法，
 
 - addXxx();添加子图形
 
+1. addCircle()
+
 > canvas.drawCircle() == path.AddCircle(x, y, radius, dir) + canvas.drawPath(path, paint);
 
+2. addPath()
+
+> 添加另一个 Path
+
 - xxxTo();画线（直线或曲线）
+
+和 addXxx() 区别在于,上面是添加的完整封闭图形（除了 addPath() ），
+而这一组添加的只是一条线。
 
 > lineTo(float x, float y): 绝对坐标
 
@@ -83,7 +92,8 @@ Canvas：draw- 打头的方法，
 > moveTo: 移动到目标位置
 
 > arcTo()/addArc():比起Canvas.drawArc()，
-少一个`useCenter`参数，只用来画弧形而不画扇形，所以不再需要
+少一个`useCenter`参数，只用来画弧形而不画扇形，所以不再需要这个参数
+
 多了一个`forceMoveTo`参数，是要「抬一下笔移动过去」,还是「直接拖着笔过去」
 
 > close():封闭当前子图形，Paint.Style == FILL | FILL_AND_STROKE 的时候，会自动封闭
