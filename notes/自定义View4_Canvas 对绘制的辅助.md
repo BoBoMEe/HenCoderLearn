@@ -67,3 +67,5 @@
 
 > 需要注意的是，这里的参数是 inch
 > Camera中，相机的默认位置是 `(0, 0, -8)(英寸)`，即 `(0, 0, -576)（像素)`
+
+相关练习：https://github.com/BoBoMEe/PracticeDraw4
