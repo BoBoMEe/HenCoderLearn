@@ -105,6 +105,8 @@ public void draw(Canvas canvas) {
 
 ![](../images/hencoder5.jpeg)
 
+相关练习：https://github.com/BoBoMEe/PracticeDraw5
+
 
 
 
